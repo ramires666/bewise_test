@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 import requests
 import os
@@ -7,6 +7,9 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uzver:supperpupperpassword@db/bewisedb'
 db = SQLAlchemy(app)
 
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -31,7 +34,7 @@ def get_questions():
     saved_questions = []
 
     while len(saved_questions) < questions_num:
-        response = requests.get(f'https://jservice.io/api/random?count=1')
+        response = requests.get(f'https://jservice.io/api/random?count={questions_num}')
         question_data = response.json()[0]
 
         if not Question.query.filter_by(id=question_data['id']).first():

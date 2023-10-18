@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="number" id="Number_of_pages_to_request" value=1>
+<button id="POST_Button">test POST{}</button>
+
+<div id="result"></div>
+
+<script>
+document.getElementById("POST_Button").addEventListener("click", function() {
+  var value = document.getElementById("Number_of_pages_to_request").value;
+  fetch('http://642e077a500a.sn.mynetname.net/get_questions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      questions_num: value,
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById("result").innerHTML = JSON.stringify(data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+});
+</script>
+
+</body>
+</html>
