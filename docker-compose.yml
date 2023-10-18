@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    volumes:
+      - /db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: uzver
+      POSTGRES_PASSWORD: supperpupperpassword
+
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+volumes:
+  db_data:
