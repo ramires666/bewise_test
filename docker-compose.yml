@@ -3,7 +3,7 @@ services:
   db:
     image: postgres
     volumes:
-      - /db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: uzver
       POSTGRES_PASSWORD: supperpupperpassword
