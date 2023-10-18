@@ -13,6 +13,13 @@ class Question(db.Model):
     question_text = db.Column(db.String(200), unique=True, nullable=False)
     answer_text = db.Column(db.String(200), nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
+    def serialize(self):
+        return {
+            'id': self.id,
+            'question_text': self.question_text,
+            'answer_text': self.answer_text,
+            'creation_date': self.creation_date.isoformat()
+        }
 
 with app.app_context():
     db.create_all()
