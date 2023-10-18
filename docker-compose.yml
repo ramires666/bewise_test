@@ -14,6 +14,13 @@ services:
       - "5000:5000"
     depends_on:
       - db
+    networks:
+      - default
+      - sites_network
 
 volumes:
   db_data:
+
+networks:
+  sites_network:
+    external: true

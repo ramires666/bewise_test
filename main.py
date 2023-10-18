@@ -14,8 +14,7 @@ class Question(db.Model):
     answer_text = db.Column(db.String(200), nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
 
-@app.before_first_request
-def create_tables():
+with app.app_context():
     db.create_all()
 
 @app.route('/get_questions', methods=['POST'])
