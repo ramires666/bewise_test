@@ -4,7 +4,7 @@ import requests
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uzver:supperpupperpassword@localhost/dbname'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uzver:supperpupperpassword@db/dbname'
 db = SQLAlchemy(app)
 
 
