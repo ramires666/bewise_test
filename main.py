@@ -29,6 +29,7 @@ with app.app_context():
 
 @app.route('/get_questions', methods=['POST'])
 def get_questions():
+    last_question = Question.query.order_by(Question.creation_date.desc()).first()
     data = request.get_json()
     questions_num = int(data.get('questions_num', 1))
     saved_questions = []
@@ -48,8 +49,7 @@ def get_questions():
             db.session.commit()
             saved_questions.append(new_question)
 
-    previous_questions = Question.query.all()
-    return jsonify([q.serialize() for q in previous_questions])
+    return jsonify(last_question.serialize() if last_question else {})
 
 
 if __name__ == '__main__':
