@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uzver:supperpupperpassword@db/bewisedb'
 db = SQLAlchemy(app)
 
-@app.route('/')
+@app.route('/get_questions', methods=['GET'])
 def home():
     return render_template('index.html')
 
@@ -30,7 +30,7 @@ with app.app_context():
 @app.route('/get_questions', methods=['POST'])
 def get_questions():
     data = request.get_json()
-    questions_num = data.get('questions_num', 1)
+    questions_num = int(data.get('questions_num', 1))
     saved_questions = []
 
     while len(saved_questions) < questions_num:
