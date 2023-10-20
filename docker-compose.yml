@@ -12,6 +12,7 @@ services:
 
   app:
     build: .
+    command: ["./wait-for-it.sh", "db:5432", "--", "python", "main.py"]
     ports:
       - "5000:5000"
     depends_on:

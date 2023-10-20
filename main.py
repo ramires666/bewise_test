@@ -9,16 +9,17 @@ load_dotenv()
 
 postgres_user = os.environ.get("POSTGRES_USER")
 postgres_password = os.environ.get("POSTGRES_PASSWORD")
-postgres_db = os.environ.get("POSTGRES_DB")
+# postgres_db = os.environ.get("POSTGRES_DB")
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{postgres_user}:{postgres_password}@bewise_test-db-1/{postgres_db}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{postgres_user}:{postgres_password}@bewise_test-db-1/bewisedb'
 db = SQLAlchemy(app)
 
 @app.route('/', methods=['GET'])
 @app.route('/get_questions', methods=['GET'])
 def home():
-    return render_template('index.html')
+    api_endpoint = os.getenv('API_ENDPOINT_LOCAL') if request.host.startswith('localhost') else os.getenv('API_ENDPOINT_PROD')
+    return render_template('index.html', api_endpoint=api_endpoint)
 
 class Question(db.Model):
     index = db.Column(db.Integer, primary_key=True, autoincrement=True)
