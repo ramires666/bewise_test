@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dotenv/8.2.0/dotenv.min.js"></script>
+</head>
 <body>
 
 <input type="number" id="Number_of_pages_to_request" value=1>
@@ -14,10 +17,10 @@ document.getElementById("POST_Button").addEventListener("click", function() {
 
   // Check if the application is running on localhost
   if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-    apiEndpoint = 'http://localhost:5000/get_questions'; // Use localhost
+    apiEndpoint = process.env.API_ENDPOINT_LOCAL; // Use the local endpoint
   }
   else {
-    apiEndpoint = 'http://642e077a500a.sn.mynetname.net/get_questions'; // Use the public address
+    apiEndpoint = process.env.API_ENDPOINT_PROD; // Use the production endpoint
   }
 
   fetch(apiEndpoint, {
