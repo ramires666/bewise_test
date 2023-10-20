@@ -12,7 +12,7 @@ postgres_password = os.environ.get("POSTGRES_PASSWORD")
 postgres_db = os.environ.get("POSTGRES_DB")
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{postgres_user}:{postgres_password}@db/{postgres_db}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{postgres_user}:{postgres_password}@bewise_test-db-1/{postgres_db}'
 db = SQLAlchemy(app)
 
 @app.route('/', methods=['GET'])
