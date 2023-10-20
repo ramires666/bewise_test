@@ -7,7 +7,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uzver:supperpupperpassword@db/bewisedb'
 db = SQLAlchemy(app)
 
-@app.route('/', '/get_questions', methods=['GET'])
+@app.route('/', methods=['GET'])
+@app.route('/get_questions', methods=['GET'])
 def home():
     return render_template('index.html')
 
