@@ -12,12 +12,14 @@ def home():
     return render_template('index.html')
 
 class Question(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    index = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer)
     question_text = db.Column(db.String(200), unique=True, nullable=False)
     answer_text = db.Column(db.String(200), nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
     def serialize(self):
         return {
+            'index': self.index,
             'id': self.id,
             'question_text': self.question_text,
             'answer_text': self.answer_text,
@@ -29,7 +31,7 @@ with app.app_context():
 
 @app.route('/get_questions', methods=['POST'])
 def get_questions():
-    last_question = Question.query.order_by(Question.creation_date.desc()).first()
+
     data = request.get_json()
     questions_num = int(data.get('questions_num', 1))
     saved_questions = []
@@ -48,8 +50,9 @@ def get_questions():
             db.session.add(new_question)
             db.session.commit()
             saved_questions.append(new_question)
-
-    return jsonify(last_question.serialize() if last_question else {})
+    last_question_index = Question.query.order_by(Question.index.desc()).first().index
+    previous_question = Question.query.get(last_question_index - 1)
+    return jsonify(previous_question.serialize() if previous_question else {})
 
 
 if __name__ == '__main__':
