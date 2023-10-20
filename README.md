@@ -38,7 +38,6 @@
     ```bash
     POSTGRES_USER=uzver
     POSTGRES_PASSWORD=supperpupperpassword
-    POSTGRES_DB=bewisedb
     API_ENDPOINT_LOCAL=http://localhost:5000/get_questions
     API_ENDPOINT_PROD=http://642e077a500a.sn.mynetname.net/get_questions
     ```
