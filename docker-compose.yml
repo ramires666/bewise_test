@@ -18,11 +18,11 @@ services:
       - db
     networks:
       - default
-      - sites_network
+#      - sites_network
 
 volumes:
   db_data:
 
-networks:
-  sites_network:
-    external: true
+#networks:
+#  sites_network:
+#    external: true

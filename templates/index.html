@@ -10,7 +10,17 @@
 <script>
 document.getElementById("POST_Button").addEventListener("click", function() {
   var value = document.getElementById("Number_of_pages_to_request").value;
-  fetch('http://642e077a500a.sn.mynetname.net/get_questions', {
+  var apiEndpoint;
+
+  // Check if the application is running on localhost
+  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+    apiEndpoint = 'http://localhost:5000/get_questions'; // Use localhost
+  }
+  else {
+    apiEndpoint = 'http://642e077a500a.sn.mynetname.net/get_questions'; // Use the public address
+  }
+
+  fetch(apiEndpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
