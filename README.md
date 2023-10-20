@@ -1,5 +1,3 @@
-Here is your text in a solid markdown format:
-
 # Bewise Test
 **Тестовое задание.**
 
